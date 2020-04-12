@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   MdRemoveCircleOutline,
@@ -107,7 +108,9 @@ export default function Cart() {
           </ProductTable>
 
           <footer>
-            <button type="submit">Finalizar pedido</button>
+            <Link to="/personaldata">
+              <button type="submit">Finalizar pedido</button>
+            </Link>
             <Total>
               <span>TOTAL:</span>
               <strong>{total}</strong>
