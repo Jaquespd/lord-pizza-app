@@ -62,3 +62,8 @@ export const ButtonBack = styled(Link)`
 export const SelectContainer = styled.div`
   margin-bottom: 20px;
 `;
+
+export const Title = styled.div`
+  margin-bottom: 20px;
+  font-weight: bold;
+`;

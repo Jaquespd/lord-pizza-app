@@ -8,7 +8,12 @@ import * as ProductActions from "../../store/modules/products/actions";
 import api from "../../services/api";
 import { formatPrice } from "../../utils/format";
 import GridPlaceholder from "../../components/GridPlaceholder/GridPlaceholder";
-import { Container, ButtonBack, SelectContainer } from "./Payment_Styles";
+import {
+  Container,
+  ButtonBack,
+  SelectContainer,
+  Title
+} from "./Payment_Styles";
 import Input from "../../components/SimpleInput";
 import SelectInput from "../../components/SelectInput";
 
@@ -53,6 +58,7 @@ export default function Payment() {
 
   return (
     <Container>
+      <Title>DADOS DO PAGAMENTO</Title>
       <Form ref={formRef} onSubmit={handleSubmit}>
         <SelectContainer>
           <SelectInput

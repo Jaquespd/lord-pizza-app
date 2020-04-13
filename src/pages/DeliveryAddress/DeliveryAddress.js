@@ -8,7 +8,7 @@ import * as ProductActions from "../../store/modules/products/actions";
 import api from "../../services/api";
 import { formatPrice } from "../../utils/format";
 import GridPlaceholder from "../../components/GridPlaceholder/GridPlaceholder";
-import { Container, ButtonBack } from "./DeliveryAddress_Styles";
+import { Container, ButtonBack, Title } from "./DeliveryAddress_Styles";
 import Input from "../../components/SimpleInput";
 import history from "../../services/history";
 
@@ -53,6 +53,7 @@ export default function DeliveryAddress() {
 
   return (
     <Container>
+      <Title>ENDEREÇO DE ENTREGA</Title>
       <Form ref={formRef} onSubmit={handleSubmit}>
         <Input
           label="Rua:"

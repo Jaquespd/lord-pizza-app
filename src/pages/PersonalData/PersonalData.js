@@ -8,7 +8,7 @@ import * as ProductActions from "../../store/modules/products/actions";
 import api from "../../services/api";
 import { formatPrice } from "../../utils/format";
 import GridPlaceholder from "../../components/GridPlaceholder/GridPlaceholder";
-import { Container, ButtonBack } from "./PersonalData_Styles";
+import { Container, ButtonBack, Title } from "./PersonalData_Styles";
 import Input from "../../components/SimpleInput";
 import history from "../../services/history";
 
@@ -53,6 +53,7 @@ export default function PersonalData() {
 
   return (
     <Container>
+      <Title>DADOS PESSOAIS</Title>
       <Form ref={formRef} onSubmit={handleSubmit}>
         <Input
           label="Nome:"
