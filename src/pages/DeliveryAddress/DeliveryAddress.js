@@ -8,11 +8,11 @@ import * as ProductActions from "../../store/modules/products/actions";
 import api from "../../services/api";
 import { formatPrice } from "../../utils/format";
 import GridPlaceholder from "../../components/GridPlaceholder/GridPlaceholder";
-import { Container, ButtonBack } from "./PersonalData_Styles";
+import { Container, ButtonBack } from "./DeliveryAddress_Styles";
 import Input from "../../components/SimpleInput";
 import history from "../../services/history";
 
-export default function PersonalData() {
+export default function DeliveryAddress() {
   const formRef = useRef(null);
 
   const products = useSelector(state => state.products);
@@ -48,38 +48,52 @@ export default function PersonalData() {
   }
 
   function handleSubmit() {
-    history.push("/deliveryaddress");
+    history.push("/payment");
   }
 
   return (
     <Container>
       <Form ref={formRef} onSubmit={handleSubmit}>
         <Input
-          label="Nome:"
-          name="name"
+          label="Rua:"
+          name="street"
           type="text"
-          placeholder="Digite seu nome"
+          placeholder="Digite o nome da sua rua"
         />
 
         <Input
-          label="Telefone:"
-          name="phone"
+          label="Numero:"
+          name="number"
           type="number"
-          placeholder="99999-9999"
+          placeholder="Digite o numero da sua casa/apto/condominio"
         />
 
         <Input
-          label="Email:"
-          name="email"
-          type="email"
-          placeholder="Digite seu email"
+          label="Bairro:"
+          name="bairro"
+          type="text"
+          placeholder="Digite seu bairro"
+        />
+
+        <Input
+          label="Complemento:"
+          name="complement"
+          type="text"
+          placeholder="Digite o complemento, caso tenha"
+        />
+
+        <Input
+          label="Ponto de Referencia:"
+          name="reference"
+          type="text"
+          placeholder="Digite um ponto de referencia"
           onKeyPress={e =>
             e.key === "Enter" ? formRef.current.submitForm() : null
           }
         />
 
         <button type="submit">Avançar</button>
-        <ButtonBack to="/cart">Voltar</ButtonBack>
+        <ButtonBack to="/personaldata">Voltar</ButtonBack>
       </Form>
     </Container>
   );

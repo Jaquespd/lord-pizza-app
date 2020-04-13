@@ -8,11 +8,11 @@ import * as ProductActions from "../../store/modules/products/actions";
 import api from "../../services/api";
 import { formatPrice } from "../../utils/format";
 import GridPlaceholder from "../../components/GridPlaceholder/GridPlaceholder";
-import { Container, ButtonBack } from "./PersonalData_Styles";
+import { Container, ButtonBack, SelectContainer } from "./Payment_Styles";
 import Input from "../../components/SimpleInput";
-import history from "../../services/history";
+import SelectInput from "../../components/SelectInput";
 
-export default function PersonalData() {
+export default function Payment() {
   const formRef = useRef(null);
 
   const products = useSelector(state => state.products);
@@ -48,38 +48,51 @@ export default function PersonalData() {
   }
 
   function handleSubmit() {
-    history.push("/deliveryaddress");
+    console.log("handleSubmit");
   }
 
   return (
     <Container>
       <Form ref={formRef} onSubmit={handleSubmit}>
-        <Input
-          label="Nome:"
-          name="name"
-          type="text"
-          placeholder="Digite seu nome"
-        />
+        <SelectContainer>
+          <SelectInput
+            type="text"
+            label="Forma de Pagamento:"
+            name="formPayment"
+            placeholder="Escolha a forma de pagamento"
+            noOptionsMessage={() => "ocorreu um erro, entre em contato"}
+            defaultValue={[
+              {
+                label: "Dinheiro",
+                value: 1
+              },
+              {
+                label: "Cartão",
+                value: 2
+              }
+            ]}
+          />
+        </SelectContainer>
 
         <Input
-          label="Telefone:"
-          name="phone"
+          label="Troco para quanto ?"
+          name="change"
           type="number"
-          placeholder="99999-9999"
+          placeholder="R$ 50,00 ... R$ 100,00"
         />
 
         <Input
-          label="Email:"
-          name="email"
-          type="email"
-          placeholder="Digite seu email"
+          label="Observações:"
+          name="observer"
+          type="text"
+          placeholder="Se quiser retirar algo do seu pedido, ou adicionar informações"
           onKeyPress={e =>
             e.key === "Enter" ? formRef.current.submitForm() : null
           }
         />
 
-        <button type="submit">Avançar</button>
-        <ButtonBack to="/cart">Voltar</ButtonBack>
+        <button type="submit">Finalizar</button>
+        <ButtonBack to="/deliveryaddress">Voltar</ButtonBack>
       </Form>
     </Container>
   );
