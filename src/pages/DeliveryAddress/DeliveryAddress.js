@@ -93,6 +93,13 @@ export default function DeliveryAddress() {
           name="reference"
           type="text"
           placeholder="Digite um ponto de referencia"
+        />
+
+        <Input
+          label="Observações:"
+          name="observer"
+          type="text"
+          placeholder="Se tiver pedido pizza com 2 sabores, escreva aqui os sabores, e caso queira retirar algo ou adicionar informações"
           onKeyPress={e =>
             e.key === "Enter" ? formRef.current.submitForm() : null
           }

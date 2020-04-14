@@ -17,6 +17,7 @@ import {
 } from "./Payment_Styles";
 import Input from "../../components/SimpleInput";
 import SelectInput from "../../components/SelectInput";
+import whatsappApi from "../../services/whatsapp";
 
 export default function Payment() {
   const formRef = useRef(null);
@@ -30,6 +31,9 @@ export default function Payment() {
       return sumAmount;
     }, {})
   );
+
+  const delivery = useSelector(state => state.delivery);
+  const cart = useSelector(state => state.cart);
 
   const dispatch = useDispatch();
 
@@ -54,57 +58,29 @@ export default function Payment() {
   }
 
   function handleSubmit() {
-    const data = formRef.current.getData();
+    const url = whatsappApi(delivery, cart);
 
-    dispatch(DeliveryActions.setDelivery(data));
-
-    // history.push("/payment");
+    window.open(url, "_blank");
   }
 
   return (
     <Container>
-      <Title>DADOS DO PAGAMENTO</Title>
-      <Form ref={formRef} onSubmit={handleSubmit}>
-        <SelectContainer>
-          <SelectInput
-            type="text"
-            label="Forma de Pagamento:"
-            name="formPayment"
-            placeholder="Escolha a forma de pagamento"
-            noOptionsMessage={() => "ocorreu um erro, entre em contato"}
-            defaultValue={[
-              {
-                label: "Dinheiro",
-                value: 1
-              },
-              {
-                label: "Cartão",
-                value: 2
-              }
-            ]}
-          />
-        </SelectContainer>
-
-        <Input
-          label="Troco para quanto ?"
-          name="change"
-          type="number"
-          placeholder="R$ 50,00 ... R$ 100,00"
-        />
-
-        <Input
-          label="Observações:"
-          name="observer"
-          type="text"
-          placeholder="Se quiser retirar algo do seu pedido, ou adicionar informações"
-          onKeyPress={e =>
-            e.key === "Enter" ? formRef.current.submitForm() : null
-          }
-        />
-
-        <button type="submit">Finalizar</button>
-        <ButtonBack to="/deliveryaddress">Voltar</ButtonBack>
-      </Form>
+      <Title>ESTAMOS QUASE LÁ, FALTA POUCO</Title>
+      <div>
+        <span>
+          Para finalizar o pedido, basta clicar no botão "FINALIZAR" abaixo e
+          seu pedido será encaminhado para nós via WHATSAPP, se for pelo celular
+          será aberto o app, se for pelo computador pelo whatsapp web.
+        </span>
+        <span>
+          Ou seja, basta apertar o botão de finalizar e depois clicar na seta de
+          enviar do whatsapp.
+        </span>
+      </div>
+      <button type="button" onClick={handleSubmit}>
+        Finalizar
+      </button>
+      <ButtonBack to="/deliveryaddress">Voltar</ButtonBack>
     </Container>
   );
 }

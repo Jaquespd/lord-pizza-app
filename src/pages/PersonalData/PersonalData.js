@@ -74,16 +74,6 @@ export default function PersonalData() {
           placeholder="99999-9999"
         />
 
-        <Input
-          label="Email:"
-          name="email"
-          type="email"
-          placeholder="Digite seu email"
-          onKeyPress={e =>
-            e.key === "Enter" ? formRef.current.submitForm() : null
-          }
-        />
-
         <button type="submit">Avançar</button>
         <ButtonBack to="/cart">Voltar</ButtonBack>
       </Form>
