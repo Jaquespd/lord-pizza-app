@@ -5,6 +5,7 @@ import { MdAddShoppingCart } from "react-icons/md";
 import Loader from "react-loader-spinner";
 import * as CartActions from "../../store/modules/cart/actions";
 import * as ProductActions from "../../store/modules/products/actions";
+import * as DeliveryActions from "../../store/modules/delivery/actions";
 import api from "../../services/api";
 import { formatPrice } from "../../utils/format";
 import GridPlaceholder from "../../components/GridPlaceholder/GridPlaceholder";
@@ -53,7 +54,11 @@ export default function Payment() {
   }
 
   function handleSubmit() {
-    console.log("handleSubmit");
+    const data = formRef.current.getData();
+
+    dispatch(DeliveryActions.setDelivery(data));
+
+    // history.push("/payment");
   }
 
   return (
