@@ -12,10 +12,7 @@ export default function whatsappApi(delivery, cart) {
 
   const templateMsg = `Ola meu nome é ${name} e gostaria de pedir: 
   ${cart.map(c => `\n${c.amount} x ${c.title}`)}
-  
-  Observações:
-  ${observer}
-    
+  ${observer && `\nObservações:\n${observer}\n`}
   O endereço de entrega é na:
   ${street}, numero ${number}, bairro ${bairro},
   ${complement},

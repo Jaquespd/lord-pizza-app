@@ -12,10 +12,10 @@ export default function Header() {
     <Container>
       <strong>
         <MdPowerSettingsNew size={24} color="#FFF" />
-        Estamos abertos
+        Qui a Dom - 16:00 as 22:00
       </strong>
       <span>
-        <FaWhatsapp size={24} color="#FFF" /> 84 98840-7763
+        <FaWhatsapp size={24} color="#FFF" /> 98840-7763
       </span>
     </Container>
   );
