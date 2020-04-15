@@ -26,7 +26,7 @@ export default function whatsappApi(delivery, cart) {
   const encodeMessage = window.encodeURIComponent(templateMsg);
 
   const urlApiWhatsapp = `${"https://api.whatsapp.com/send?phone=" +
-    "5584996522011" +
+    "5584988407763" +
     "&text="}${encodeMessage}`;
 
   return urlApiWhatsapp;

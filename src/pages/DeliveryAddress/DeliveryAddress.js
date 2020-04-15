@@ -1,57 +1,46 @@
-import React, { useEffect, useRef } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useEffect, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
 import { Form } from "@unform/web";
-import { MdAddShoppingCart } from "react-icons/md";
-import Loader from "react-loader-spinner";
-import * as CartActions from "../../store/modules/cart/actions";
-import * as ProductActions from "../../store/modules/products/actions";
 import * as DeliveryActions from "../../store/modules/delivery/actions";
-import api from "../../services/api";
-import { formatPrice } from "../../utils/format";
-import GridPlaceholder from "../../components/GridPlaceholder/GridPlaceholder";
 import { Container, ButtonBack, Title } from "./DeliveryAddress_Styles";
 import Input from "../../components/SimpleInput";
 import history from "../../services/history";
 
 export default function DeliveryAddress() {
+  const [street, setStreet] = useState("");
+  const [number, setNumber] = useState("");
+  const [bairro, setBairro] = useState("");
+  const [complement, setComplement] = useState("");
+  const [reference, setReference] = useState("");
+  const [observer, setObserver] = useState("");
+
   const formRef = useRef(null);
-
-  const products = useSelector(state => state.products);
-
-  const amount = useSelector(state =>
-    state.cart.reduce((sumAmount, product) => {
-      sumAmount[product.id] = product.amount;
-
-      return sumAmount;
-    }, {})
-  );
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    async function loadProducts() {
-      const response = await api.get("products");
+    const delivery = JSON.parse(localStorage.getItem("@lord-pizza/delivery"));
 
-      const data = response.data.map(product => ({
-        ...product,
-        priceFormatted: formatPrice(product.price),
-        loading: false
-      }));
+    dispatch(DeliveryActions.setDelivery(delivery));
 
-      dispatch(ProductActions.storeProducts(data));
-    }
-
-    loadProducts();
+    setStreet(delivery.street);
+    setNumber(delivery.number);
+    setBairro(delivery.bairro);
+    setComplement(delivery.complement);
+    setReference(delivery.reference);
+    setObserver(delivery.observer);
   }, [dispatch]);
-
-  function handleAddProduct(id) {
-    dispatch(CartActions.addToCartRequest(id));
-  }
 
   function handleSubmit() {
     const data = formRef.current.getData();
 
     dispatch(DeliveryActions.setDelivery(data));
+
+    const oldData = JSON.parse(localStorage.getItem("@lord-pizza/delivery"));
+
+    const newData = Object.assign(oldData, data);
+
+    localStorage.setItem("@lord-pizza/delivery", JSON.stringify(newData));
 
     history.push("/payment");
   }
@@ -65,6 +54,8 @@ export default function DeliveryAddress() {
           name="street"
           type="text"
           placeholder="Digite o nome da sua rua"
+          value={street}
+          onChange={e => setStreet(e.target.value)}
         />
 
         <Input
@@ -72,6 +63,8 @@ export default function DeliveryAddress() {
           name="number"
           type="number"
           placeholder="Digite o numero da sua casa/apto/condominio"
+          value={number}
+          onChange={e => setNumber(e.target.value)}
         />
 
         <Input
@@ -79,6 +72,8 @@ export default function DeliveryAddress() {
           name="bairro"
           type="text"
           placeholder="Digite seu bairro"
+          value={bairro}
+          onChange={e => setBairro(e.target.value)}
         />
 
         <Input
@@ -86,6 +81,8 @@ export default function DeliveryAddress() {
           name="complement"
           type="text"
           placeholder="Digite o complemento, caso tenha"
+          value={complement}
+          onChange={e => setComplement(e.target.value)}
         />
 
         <Input
@@ -93,6 +90,8 @@ export default function DeliveryAddress() {
           name="reference"
           type="text"
           placeholder="Digite um ponto de referencia"
+          value={reference}
+          onChange={e => setReference(e.target.value)}
         />
 
         <Input
@@ -100,6 +99,8 @@ export default function DeliveryAddress() {
           name="observer"
           type="text"
           placeholder="Se tiver pedido pizza com 2 sabores, escreva aqui os sabores, e caso queira retirar algo ou adicionar informações"
+          value={observer}
+          onChange={e => setObserver(e.target.value)}
           onKeyPress={e =>
             e.key === "Enter" ? formRef.current.submitForm() : null
           }

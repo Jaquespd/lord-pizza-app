@@ -1,57 +1,38 @@
-import React, { useEffect, useRef } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useEffect, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
 import { Form } from "@unform/web";
-import { MdAddShoppingCart } from "react-icons/md";
-import Loader from "react-loader-spinner";
-import * as CartActions from "../../store/modules/cart/actions";
-import * as ProductActions from "../../store/modules/products/actions";
 import * as DeliveryActions from "../../store/modules/delivery/actions";
-import api from "../../services/api";
-import { formatPrice } from "../../utils/format";
-import GridPlaceholder from "../../components/GridPlaceholder/GridPlaceholder";
 import { Container, ButtonBack, Title } from "./PersonalData_Styles";
 import Input from "../../components/SimpleInput";
 import history from "../../services/history";
 
 export default function PersonalData() {
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+
   const formRef = useRef(null);
-
-  const products = useSelector(state => state.products);
-
-  const amount = useSelector(state =>
-    state.cart.reduce((sumAmount, product) => {
-      sumAmount[product.id] = product.amount;
-
-      return sumAmount;
-    }, {})
-  );
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    async function loadProducts() {
-      const response = await api.get("products");
+    const delivery = JSON.parse(localStorage.getItem("@lord-pizza/delivery"));
 
-      const data = response.data.map(product => ({
-        ...product,
-        priceFormatted: formatPrice(product.price),
-        loading: false
-      }));
+    dispatch(DeliveryActions.setDelivery(delivery));
 
-      dispatch(ProductActions.storeProducts(data));
-    }
-
-    loadProducts();
+    setName(delivery.name);
+    setPhone(delivery.phone);
   }, [dispatch]);
-
-  function handleAddProduct(id) {
-    dispatch(CartActions.addToCartRequest(id));
-  }
 
   function handleSubmit() {
     const data = formRef.current.getData();
 
     dispatch(DeliveryActions.setDelivery(data));
+
+    const oldData = JSON.parse(localStorage.getItem("@lord-pizza/delivery"));
+
+    const newData = Object.assign(oldData, data);
+
+    localStorage.setItem("@lord-pizza/delivery", JSON.stringify(newData));
 
     history.push("/deliveryaddress");
   }
@@ -65,6 +46,8 @@ export default function PersonalData() {
           name="name"
           type="text"
           placeholder="Digite seu nome"
+          value={name}
+          onChange={e => setName(e.target.value)}
         />
 
         <Input
@@ -72,6 +55,8 @@ export default function PersonalData() {
           name="phone"
           type="number"
           placeholder="99999-9999"
+          value={phone}
+          onChange={e => setPhone(e.target.value)}
         />
 
         <button type="submit">Avançar</button>

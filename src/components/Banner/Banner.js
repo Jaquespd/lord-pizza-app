@@ -15,7 +15,7 @@ export default function Header() {
         Estamos abertos
       </strong>
       <span>
-        <FaWhatsapp size={24} color="#FFF" /> 84 99999-9999
+        <FaWhatsapp size={24} color="#FFF" /> 84 98840-7763
       </span>
     </Container>
   );
