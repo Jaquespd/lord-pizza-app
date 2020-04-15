@@ -32,9 +32,13 @@ export default function PersonalData() {
 
     const oldData = JSON.parse(localStorage.getItem("@lord-pizza/delivery"));
 
-    const newData = Object.assign(oldData, data);
+    if (oldData) {
+      const newData = Object.assign(oldData, data);
 
-    localStorage.setItem("@lord-pizza/delivery", JSON.stringify(newData));
+      localStorage.setItem("@lord-pizza/delivery", JSON.stringify(newData));
+    } else {
+      localStorage.setItem("@lord-pizza/delivery", JSON.stringify(data));
+    }
 
     history.push("/deliveryaddress");
   }
