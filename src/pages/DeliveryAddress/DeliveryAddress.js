@@ -21,14 +21,16 @@ export default function DeliveryAddress() {
   useEffect(() => {
     const delivery = JSON.parse(localStorage.getItem("@lord-pizza/delivery"));
 
-    dispatch(DeliveryActions.setDelivery(delivery));
+    if (delivery) {
+      dispatch(DeliveryActions.setDelivery(delivery));
 
-    setStreet(delivery.street);
-    setNumber(delivery.number);
-    setBairro(delivery.bairro);
-    setComplement(delivery.complement);
-    setReference(delivery.reference);
-    setObserver(delivery.observer);
+      setStreet(delivery.street);
+      setNumber(delivery.number);
+      setBairro(delivery.bairro);
+      setComplement(delivery.complement);
+      setReference(delivery.reference);
+      setObserver(delivery.observer);
+    }
   }, [dispatch]);
 
   function handleSubmit() {

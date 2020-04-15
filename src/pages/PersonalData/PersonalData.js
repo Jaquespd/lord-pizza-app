@@ -17,10 +17,12 @@ export default function PersonalData() {
   useEffect(() => {
     const delivery = JSON.parse(localStorage.getItem("@lord-pizza/delivery"));
 
-    dispatch(DeliveryActions.setDelivery(delivery));
+    if (delivery) {
+      dispatch(DeliveryActions.setDelivery(delivery));
 
-    setName(delivery.name);
-    setPhone(delivery.phone);
+      setName(delivery.name);
+      setPhone(delivery.phone);
+    }
   }, [dispatch]);
 
   function handleSubmit() {
