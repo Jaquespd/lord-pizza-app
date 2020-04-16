@@ -2,7 +2,12 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Form } from "@unform/web";
 import * as DeliveryActions from "../../store/modules/delivery/actions";
-import { Container, ButtonBack, Title } from "./DeliveryAddress_Styles";
+import {
+  Container,
+  ButtonBack,
+  Title,
+  ButtonFormContainer
+} from "./DeliveryAddress_Styles";
 import Input from "../../components/SimpleInput";
 import history from "../../services/history";
 
@@ -111,9 +116,10 @@ export default function DeliveryAddress() {
             e.key === "Enter" ? formRef.current.submitForm() : null
           }
         />
-
-        <button type="submit">Avançar</button>
-        <ButtonBack to="/personaldata">Voltar</ButtonBack>
+        <ButtonFormContainer>
+          <ButtonBack to="/personaldata">Voltar</ButtonBack>
+          <button type="submit">Avançar</button>
+        </ButtonFormContainer>
       </Form>
     </Container>
   );

@@ -2,7 +2,12 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Form } from "@unform/web";
 import * as DeliveryActions from "../../store/modules/delivery/actions";
-import { Container, ButtonBack, Title } from "./PersonalData_Styles";
+import {
+  Container,
+  ButtonBack,
+  Title,
+  ButtonFormContainer
+} from "./PersonalData_Styles";
 import Input from "../../components/SimpleInput";
 import history from "../../services/history";
 
@@ -65,8 +70,10 @@ export default function PersonalData() {
           onChange={e => setPhone(e.target.value)}
         />
 
-        <button type="submit">Avançar</button>
-        <ButtonBack to="/cart">Voltar</ButtonBack>
+        <ButtonFormContainer>
+          <ButtonBack to="/cart">Voltar</ButtonBack>
+          <button type="submit">Avançar</button>
+        </ButtonFormContainer>
       </Form>
     </Container>
   );
