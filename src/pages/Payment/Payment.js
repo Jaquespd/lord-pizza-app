@@ -13,7 +13,8 @@ import {
   Container,
   ButtonBack,
   SelectContainer,
-  Title
+  Title,
+  ButtonFormContainer
 } from "./Payment_Styles";
 import Input from "../../components/SimpleInput";
 import SelectInput from "../../components/SelectInput";
@@ -77,10 +78,12 @@ export default function Payment() {
           enviar do whatsapp.
         </span>
       </div>
-      <button type="button" onClick={handleSubmit}>
-        Finalizar
-      </button>
-      <ButtonBack to="/deliveryaddress">Voltar</ButtonBack>
+      <ButtonFormContainer>
+        <ButtonBack to="/deliveryaddress">Voltar</ButtonBack>
+        <button type="button" onClick={handleSubmit}>
+          Finalizar
+        </button>
+      </ButtonFormContainer>
     </Container>
   );
 }

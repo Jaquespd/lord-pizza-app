@@ -31,6 +31,7 @@ export const Container = styled.div`
 `;
 
 export const ButtonBack = styled(Link)`
+    margin-top: 20px;
     background: #4d4d4d;
     color: #fff;
     border: 0;
@@ -66,4 +67,13 @@ export const SelectContainer = styled.div`
 export const Title = styled.div`
   margin-bottom: 20px;
   font-weight: bold;
+`;
+
+export const ButtonFormContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  @media (max-width: 520px) {
+    flex-direction: column-reverse;
+  }
 `;

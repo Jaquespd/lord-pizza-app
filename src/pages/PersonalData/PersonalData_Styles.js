@@ -70,6 +70,6 @@ export const ButtonFormContainer = styled.div`
   justify-content: space-between;
 
   @media (max-width: 520px) {
-    flex-direction: column;
+    flex-direction: column-reverse;
   }
 `;
