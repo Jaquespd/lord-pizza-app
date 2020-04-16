@@ -5,7 +5,8 @@ import {
   MdRemoveCircleOutline,
   MdAddCircleOutline,
   MdDelete,
-  MdRemoveShoppingCart
+  MdRemoveShoppingCart,
+  MdMotorcycle
 } from "react-icons/md";
 import * as CartActions from "../../store/modules/cart/actions";
 import { formatPrice } from "../../utils/format";
@@ -14,17 +15,28 @@ import {
   ProductTable,
   Total,
   EmptyCart,
-  StartShopping
+  StartShopping,
+  DeliverySection
 } from "./Cart_Styles";
 
 export default function Cart() {
-  const total = useSelector(state =>
-    formatPrice(
-      state.cart.reduce((totalAmount, product) => {
-        return totalAmount + product.price * product.amount;
-      }, 0)
-    )
+  const deliveryPrice = 7;
+  const productsPrice = useSelector(state =>
+    state.cart.reduce((totalAmount, product) => {
+      return totalAmount + product.price * product.amount;
+    }, 0)
   );
+
+  const total = formatPrice(deliveryPrice + productsPrice);
+
+  // SEM CUSTO DE FRETE
+  // const total = useSelector(state =>
+  //   formatPrice(
+  //     state.cart.reduce((totalAmount, product) => {
+  //       return totalAmount + product.price * product.amount;
+  //     }, 0)
+  //   )
+  // );
 
   const cart = useSelector(state =>
     state.cart.map(product => ({
@@ -106,7 +118,10 @@ export default function Cart() {
               ))}
             </tbody>
           </ProductTable>
-
+          <DeliverySection>
+            <MdMotorcycle size={40} color="#fec903" />
+            <span>FRETE: R$ 7,00</span>
+          </DeliverySection>
           <footer>
             <Link to="/personaldata">
               <button type="submit">Finalizar pedido</button>

@@ -254,3 +254,24 @@ export const Total = styled.div`
     margin-left: 8px;
   }
 `;
+
+export const DeliverySection = styled.section`
+  padding: 20px 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  border-bottom: 1px solid #eee;
+
+  @media (max-width: 640px) {
+    padding: 10px 20px 10px 20px;
+  }
+
+  span {
+    /* display: block;
+    margin-top: 4px; */
+    font-size: 14px;
+    font-weight: bold;
+  }
+`;

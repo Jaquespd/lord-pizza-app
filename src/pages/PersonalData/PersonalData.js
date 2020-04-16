@@ -60,7 +60,7 @@ export default function PersonalData() {
           label="Telefone:"
           name="phone"
           type="number"
-          placeholder="99999-9999"
+          placeholder="999999999"
           value={phone}
           onChange={e => setPhone(e.target.value)}
         />

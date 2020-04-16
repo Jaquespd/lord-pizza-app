@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const Container = styled.header`
   display: flex;
@@ -48,7 +48,7 @@ export const Cart = styled(Link)`
   }
 
   > span:last-child {
-    background: #7159c1;
+    background: #fec903;
     color: #fff;
     font-size: 11px;
     line-height: 20px;
