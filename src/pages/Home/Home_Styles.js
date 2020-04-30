@@ -66,6 +66,10 @@ export const ProductList = styled.ul`
         flex-direction: column;
         margin-top: auto;
 
+        section {
+          color: #929090;
+        }
+
         > span {
           font-size: 21px;
           font-weight: bold;

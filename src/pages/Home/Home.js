@@ -55,6 +55,7 @@ export default function Home() {
             <strong>{product.title}</strong>
 
             <div>
+              <section>{product.description}</section>
               <span>{product.priceFormatted}</span>
 
               <button
